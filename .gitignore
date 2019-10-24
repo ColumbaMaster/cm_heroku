@@ -29,9 +29,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/cielo_secrets.json
-/config/cielo_secrets_cm.json
-/config/urls.json
 /config/credentials.yml.enc
 /config/sendgrid_secrets.json
-/config/initializers/constantes_cm.rb
+/config/gmaps_secrets.json

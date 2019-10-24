@@ -12,7 +12,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "//www.google.com/jsapi" %>
-    <%= javascript_include_tag "//maps.googleapis.com/maps/api/js?key=#{API_KEY_MAPS}" %>
+    <%= javascript_include_tag "//maps.googleapis.com/maps/api/js?key=#{google_api}" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
     <%= yield(:head_tags) %>

@@ -208,4 +208,12 @@ module ApplicationHelper
     end
   end
   
+  def google_api
+    if ENV['RAILS_ENV'] == 'production'
+      ENV['API_KEY_MAPS']
+    else
+      secrets = JSON.load(File.read('config/gmaps_secrets.json'))
+      secrets['API_KEY_MAPS']
+    end
+  end
 end
