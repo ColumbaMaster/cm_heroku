@@ -40,7 +40,7 @@ gem 'jquery-ui-rails'
 gem "will_paginate", "~> 3.1.6"
 gem 'will_paginate-bootstrap4'
 
-gem 'aws-sdk-rails'
+# gem 'aws-sdk-rails'
 gem 'flag-icons-rails'
 
 gem 'jquery-inputmask-rails'
