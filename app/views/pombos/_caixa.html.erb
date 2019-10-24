@@ -1,0 +1,29 @@
+<% if pombo !=nil %>
+  <div class="card">
+    <div class="<%= class_pombo_pais(estilo) %>"><%= icon_pombo(pombo.sexo) %> <%= "#{pombo.anilha} #{pombo.nome}" %></div>
+    <div class="card-body small">
+      <%= pluralize(age(pombo.dtnasc), t(:label_ano)) if pombo.dtnasc.present? %> <%= pombo.vivo ? t(:label_vivo) : '' %>
+      <% if logged_in? && !visivel_correct_user(pombo.id.to_s) %>
+        <br />
+        <%= link_to edit_pombo_path(pombo), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+          <span class="fa fa-pencil"></span>
+        <% end %>
+        <%= link_to show_modal_pombos_path(id: pombo.id, tela: 'M'),  class: botao_link, remote: true, :title => t(:label_mais_info), :rel => 'tooltip', "data-placement" => "bottom" do %>
+          <span class="fa fa-info-circle"></span>
+        <% end %>
+      <% end %>
+      <%= link_to show_modal_pombos_path(id: pombo.id, tela: 'T'),  class: botao_link, remote: true, :title => t(:label_premio), :rel => 'tooltip', "data-placement" => "bottom" do %>
+        <span class="fa fa-star-o"></span>
+      <% end %>
+    </div>
+  </div>
+<% elsif mostra_vazio.present? %>
+  <div class="card">
+    <div class="<%= class_pombo_pais(estilo) %>">
+      <br /><br />
+    </div>
+    <div class="card-body small">
+      <br /><br /><br /><br />
+    </div>
+  </div>
+<% end %>

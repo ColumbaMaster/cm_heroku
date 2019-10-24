@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-8 ml-md-auto mr-md-auto">
+    <div class="form-group">
+      <%= label_tag t(:label_numero_cartao) %>
+      <%= text_field_tag :numero_cartao, @usuario[:numero_cartao], 'data-inputmask': mask_cartao, class: 'form-control', required: true, autofocus: true %>
+    </div>
+    
+    <div class="form-group">
+      <%= label_tag t(:label_bandeira) %>
+      <%= select_tag :bandeira_cartao, options_for_select(bandeira_cc(@usuario), @usuario[:bandeira_cartao]), include_blank: true, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= label_tag t(:label_nome_cartao) %>
+      <%= text_field_tag :nome_cartao,  @usuario[:nome_cartao], class: 'form-control', required: true, size: 80 %>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group col-sm-6">
+        <%= label_tag t(:label_vencimento) %>
+        <%= text_field_tag :dtexpirado,  @usuario[:dtexpirado], class: ' form-control', required: true, 'data-inputmask': mask_vencto_cartao %>
+      </div>
+      
+      <div class="form-group col-sm-6">
+        <%= label_tag t(:label_cvc).upcase %>
+        <%= number_field_tag :cvc_par, params[:cvc_par], min: 1, max: 9999, class: 'form-control', required: true %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $(":input").inputmask();
+  });
+</script>

@@ -1,0 +1,51 @@
+<% provide(:title, t(:label_lista_usuarios)) %>
+<h4><strong><%= t :label_lista_usuarios %></strong></h4>
+
+<div id="lista_usu" class="list-group">
+  <% Usuario.all.each do |u| %>
+    <div class="list-group-item">
+      <div class="row linha-1-4">
+        <div class="col-sm-1">
+          <strong>ID</strong>: <%= u.id %>
+        </div>
+        <div class="col-sm-3">
+          <strong><%= t(:label_nome) %></strong>: <%= u.nome %>
+        </div>
+        <% if u.planos.count > 0 %>
+          <% plano = u.planos.last %>
+          <div class="col-sm-3">
+            <strong><%= t :label_assinatura %></strong>: <%= nome_plano plano %>
+          </div>
+          <div class="col-sm-3">
+            <span class="<%= class_status_assinatura(plano) %>"><%= t status_assinatura(plano) %></span>
+          </div>
+          <div class="col-sm-2">
+            <strong><%= t(:label_tipo) %></strong>: <%= t ("label_tipo_usuario_#{u.tipo_usuario}") %>
+          </div>
+        <% end %>
+      </div>
+      <div class="row linha-2-0">
+        <div class="col-sm-12">
+          <%= link_to edit_usuario_path(u), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-pencil"></span>
+          <% end %>
+          <%= link_to u, method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, :title => t(:label_excluir), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-trash"></span>
+          <% end %>
+          <%= link_to show_modal_usuarios_path(id: u.id, acao: MODAL_USU_PAGTO),  class: botao_link, :title => t(:label_financeiro), :rel => 'tooltip', "data-placement" => "bottom", remote: true do %>
+            <span class="fa fa-usd"></span>
+          <% end %>
+          <%= link_to reenviar_email_ativacao_usuario_path(u),  class: botao_link, method: :post, :title => t(:msg_info_email_ativacao), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-envelope"></span>
+          <% end %>
+          <%= link_to alterar_tipo_usuario_path(u),  class: botao_link, :title => t(:msg_info_tornar_moderador), :rel => 'tooltip', "data-placement" => "bottom", method: :post do %>
+            <span class="fa fa-random"></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div id="modal">
+</div>

@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dtinicio_pagto: 2018-08-21 13:30:10
+  tipo: 'B'
+  valor_mensal: 1.5
+  usuario: michael
+
+two:
+  dtinicio_pagto: 2018-08-21 13:30:10
+  tipo: 'M'
+  valor_mensal: 1.5
+  usuario: aderman
+

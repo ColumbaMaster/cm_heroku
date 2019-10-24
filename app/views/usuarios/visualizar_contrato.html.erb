@@ -1,0 +1,78 @@
+<% provide(:title, t(:label_contrato)) %>
+
+<h4>
+  <strong>
+      <%= t :label_contrato %>
+  </strong>
+</h4>
+
+
+<p>
+<textarea readonly class="form-control" rows="15" cols="120">
+<%= t :msg_contrato_titulo %>
+
+<%= t :msg_contrato_1 %>
+
+<%= t :msg_contrato_1_desc_html %>
+<%= t :msg_contrato_1_1 %>
+<%= t :msg_contrato_1_2 %>
+<%= t :msg_contrato_1_3 %>
+
+<%= t :msg_contrato_2 %>
+<%= t :msg_contrato_2_1_html %>
+<%= t :msg_contrato_2_2 %>
+
+<%= t :msg_contrato_3 %>
+<%= t :msg_contrato_3_1 %>
+<%= t :msg_contrato_3_2 %>
+<%= t :msg_contrato_3_3 %>
+<%= t :msg_contrato_3_4 %>
+<%= t :msg_contrato_3_5 %>
+<%= t :msg_contrato_3_6 %>
+<%= t :msg_contrato_3_7 %>
+<%= t :msg_contrato_3_8 %>
+<%= t :msg_contrato_3_9 %>
+<%= t :msg_contrato_3_10 %>
+
+<%= t :msg_contrato_4 %>
+<%= t :msg_contrato_4_1 %>
+<%= t :msg_contrato_4_2 %>
+<%= t :msg_contrato_4_3 %>
+<%= t :msg_contrato_4_4 %>
+<%= t :msg_contrato_4_5 %>
+<%= t :msg_contrato_4_6 %>
+<%= t :msg_contrato_4_7 %>
+
+<%= t :msg_contrato_5 %>
+<%= t :msg_contrato_5_1 %>
+<%= t :msg_contrato_5_2 %>
+<%= t :msg_contrato_5_3 %>
+<%= t :msg_contrato_5_4 %>
+
+<%= t :msg_contrato_6 %>
+<%= t :msg_contrato_6_1 %>
+<%= t :msg_contrato_6_2 %>
+<%= t :msg_contrato_6_3 %>
+<%= t :msg_contrato_6_4 %>
+<%= t :msg_contrato_6_5 %>
+
+<%= t :msg_contrato_7 %>
+<%= t :msg_contrato_7_1 %>
+<%= t :msg_contrato_7_2 %>
+<%= t :msg_contrato_7_3 %>
+
+<%= t :msg_contrato_8 %>
+<%= t :msg_contrato_8_1 %>
+</textarea>
+</p>
+
+<div class="row">
+  <div class="col-sm-5">
+    <%= link_to "#{t :label_aceitar_contrato}", aceitar_contrato_usuario_path(@usuario, aceitar: true), method: :post, class: 'btn btn-success btn-block' %>
+  </div>
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-5">
+    <%= link_to "#{t :label_recusar_contrato}", aceitar_contrato_usuario_path(@usuario, aceitar: false), method: :post, class: 'btn btn-danger btn-block', data: { confirm: t(:msg_quest_recusar_contrato) }  %>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- https://www.mirceasamuila.com/posts/bootstrap-modals-in-rails -->
+<div id="modal_usuario" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <% if @modal == MODAL_USU_PAGTO %>
+          <h4 class="modal-title"><%= "#{t :label_nome} #{@usuario.nome} - Status: #{@retorno["RecurrentPayment"]["Status"]}"%></h4>
+        <% else %>
+          <h4 class="modal-title"><%= t :label_coordenadas %></h4>
+        <% end %>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div id="modal_msg"></div>
+        
+        <% if @modal == MODAL_USU_PAGTO %>
+          <div class="list-group">
+            <div class="list-group-item">
+              <div class="row linha-1-4">
+                <div class="col-sm-6">
+                  <strong>Primeira mensalidade:</strong>: <%= I18n.localize @retorno["RecurrentPayment"]["CreateDate"].to_date %>
+                </div>
+                <div class="col-sm-6">
+                  <strong>Próxima mensalidade</strong>: <%= I18n.localize @retorno["RecurrentPayment"]["NextRecurrency"].to_date %>
+                </div>
+              </div>
+              <div class="row linha-1-4">
+                <div class="col-sm-5">
+                  <strong>Qtde de pagtos</strong>: <%= @retorno["RecurrentPayment"]["RecurrentTransactions"].size %>
+                </div>
+                <div class="col-sm-5">
+                  <strong>Mensalidade</strong>: <%= number_to_currency(@retorno["RecurrentPayment"]["Amount"].to_i/100.0) %>
+                </div>
+                <div class="col-sm-2">
+                  <strong>Total</strong>: <%= number_to_currency(@retorno["RecurrentPayment"]["Amount"].to_i/100 * @retorno["RecurrentPayment"]["RecurrentTransactions"].size) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <p>
+            <div id="map"></div>
+          </p>
+          <%= label_tag 'latitude' %>
+          <%= text_field_tag :lat, @usuario[:lat], class: 'form-control' %>
+      
+          <%= label_tag 'longitude' %>
+          <%= text_field_tag :lng, @usuario[:lng], class: 'form-control' %>
+        <% end %>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal"><%= t(:label_fechar) %></button>
+      </div>
+    </div>
+  </div>
+</div>

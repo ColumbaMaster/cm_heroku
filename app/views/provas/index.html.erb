@@ -1,0 +1,47 @@
+<% provide(:title, t(:label_lista_provas)) %>
+<h4><strong><%= t :label_lista_provas %></strong></h4>
+
+<%= link_to new_prova_path, class: botao_link do %>
+  <span class="fa fa-plus"></span> <%= "#{t :label_cadastrar} #{t :label_prova}" %>
+<% end %>
+<br /><br />
+
+<div id="lista_pombal" class="list-group">
+  <% if @provas != nil %>
+    <% @provas.each do |prova| %>
+      <div class="list-group-item">
+        <div class="row linha-1-4">
+          <div class="col-sm-12">
+            <strong><%= "#{prova.competicao.nome}-#{prova.competicao.ano}" %></strong> 
+          </div>
+        </div>
+        <div class="row linha-1-4">
+          <div class="col-sm-8">
+            <%= link_to prova do %><%= prova.nome %> - <%= t("label_tipo_prova_#{prova.tipo}") %><% end %>
+          </div>
+          <div class="col-sm-4">
+            <strong><%= t :label_horario_solta %></strong>: <%= prova.dtsolta.strftime(mask_datahora_sem_segundos) %>
+          </div>
+        </div>
+        <div class="row linha-2-0">
+          <div class="col-sm-12">
+            <% if autor_info(prova.usuario) %>
+              <%= link_to edit_prova_path(prova), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+                <span class="fa fa-pencil"></span>
+              <% end %>
+              <%= link_to prova, method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, :title => t(:label_excluir), :rel => 'tooltip', "data-placement" => "bottom" do %>
+                <span class="fa fa-trash"></span>
+              <% end %>
+            <% end %>
+            <%= link_to show_modal_result_provas_path(id: prova.id, acao: MODAL_PRV_RESUL, opcao_result: 'P'), class: botao_link, remote: true do %>
+              <span class="fa fa-flag"></span> <%= t :label_informar_chegada %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<br>
+<div id="modal_result"></div>

@@ -1,0 +1,56 @@
+</div>
+<!-- fecha o conteiner aberto no application.html -->
+<div class="container-fluid bg-1 fundo" >
+  <div class="position-sticky float-right">
+    <a href="<%= request.path %>?locale=pt-BR">
+      <span class="flag-icon flag-icon-br"></span>
+    </a>
+    <a href="<%= request.path %>?locale=en">
+      <span class="flag-icon flag-icon-us"></span>
+    </a>  
+  </div>
+  <br />
+  <h3><%=t :home_bem_vindo %></h3>
+  <%= image_tag("logo_cm_central.png", alt: "", size: "696x480", class: "img-fluid mx-auto d-block") %>
+  <h3><%=t :home_msg_1 %></h3>
+  <br />
+</div>
+  
+<div class="container-fluid bg-2 text-center text-light">
+  <h4><%=t :home_msg_2 %></h4>
+  <h4><%=t :home_msg_3 %></h4>
+</div>
+  
+<div class="container-fluid bg-3 text-center">
+  <h4><%=t :home_msg_4 %></h4>
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <ul class="text-left">
+        <li><h5><%=t :home_msg_5 %></h5></li>
+        <li><h5><%=t :home_msg_6 %></h5></li>
+        <li><h5><%=t :home_msg_7 %></h5></li>
+        <li><h5><%=t :home_msg_8 %></h5></li>
+      </ul>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+</div>
+
+<div class="container-fluid bg-2 text-center">
+  <div class="text-center text-light">
+    <h4><%= t :msg_info_escolha_o_plano %></h4>
+  </div>
+  <br />
+  <%= render 'shared/planos', tela: INI_PAGE %>
+  <br />
+  <div class="row">
+    <div class="col-sm-8 ml-md-auto mr-md-auto">
+      <%= link_to t(:msg_info_assine_ja), inscrever_path, class: 'btn btn-danger btn-block' %>
+    </div>
+  </div>
+  <br />
+  
+</div>
+<!-- inicia um div para ser fechado no application.html -->
+<div>

@@ -1,0 +1,44 @@
+<% provide(:title, t(:label_time)) %>
+
+<div id="index_msg"></div>
+<h4><strong><%= t :label_time %></strong></h4>
+<!--
+%= link_to new_equipe_path, class: botao_link do %
+  <span class="fa fa-plus"></span> %= "#{t :label_cadastrar} #{t :label_time}" %
+% end %
+-->
+
+<div id="lista_eqps" class="list-group">
+  <% @equipes.each do |equipe| %>
+    <div class="list-group-item">
+      <div class="row linha-1-4">
+        <div class="col-sm-5">
+          <strong><%= t(:label_nome) %></strong>: <%= equipe.nome %>
+        </div>
+      </div>
+      <div class="row linha-2-0">
+        <div class="col-sm-12">
+          <%= link_to edit_equipe_path(equipe), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-pencil"></span>
+          <% end %>
+          <%= link_to show_modal_equipe_path(equipe),  class: botao_link, remote: true, :title => "#{t(:label_adicionar_compl, compl: t(:label_pombo))}", :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-plus-circle"></span>
+          <% end %>
+          <%= link_to equipe, method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, :title => t(:label_excluir), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-trash"></span>
+          <% end %>
+        </div>
+      </div>
+      
+      <div id="lista_time">
+        <% @equipe = equipe %>
+        <%= render 'lista' %>
+      </div>
+
+    </div>
+  <% end %>
+</div>
+
+<br>
+<div id="modal">
+</div>

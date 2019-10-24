@@ -13,4 +13,22 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
+//= require jquery.inputmask.numeric.extensions
+//= require jquery.inputmask.date.extensions
+//= require popper
+//= require bootstrap
 //= require_tree .
+
+// jQuery( function($) {
+//     $('a').tooltip();
+// });
+
+$(document).ready(function(){
+  $(":input").inputmask();
+});
+

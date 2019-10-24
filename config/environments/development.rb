@@ -34,6 +34,21 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+  
+  config.action_mailer.delivery_method = :smtp
+  
+  secrets = JSON.load(File.read('config/sendgrid_secrets.json'))
+
+  host = 'https://05733103ffbe4ad985ece33258d59b7d.vfs.cloud9.us-east-2.amazonaws.com/'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => 'apikey',
+    :password       => secrets['api_key'],
+    :enable_starttls_auto => true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -1,0 +1,63 @@
+<% provide(:title, @competicao.nome) %>
+
+<div class="container">
+  <div class="row">
+    <strong><%= @competicao.nome %> - <%= @competicao.ano %></strong>
+    <% if autor_info(@competicao.usuario) %>
+      <%= link_to edit_competicao_path(@competicao), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+        <span class="fa fa-pencil"></span>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <strong><%= t(:label_clube) %></strong>: <%= Clube.find(@competicao.clb_id).nome %>
+  </div>
+</div>
+<br />
+<%= link_to new_prova_path(competicao_id: @competicao.id), class: botao_link, :title => "#{t :label_cadastrar} #{t :label_prova}", :rel => 'tooltip', "data-placement" => "bottom" do %>
+  <span class="fa fa-plus"></span> <%= "#{t :label_cadastrar} #{t :label_prova}" %>
+<% end %>
+<%= link_to esquadrao_competicao_path(usr: current_user), class: botao_link, :title => t(:label_esquadrao), :rel => 'tooltip', "data-placement" => "bottom" do %>
+  <span class="fa fa-trophy"></span> <%= t :label_esquadrao %>
+<% end %>
+
+<br /><br />
+<strong><%= t :label_lista_provas %></strong>
+
+<% @competicao.provas.sort_by{|p| p.dtsolta}.reverse.each do |prova| %>
+  <div class="list-group-item">
+    <div class="row linha-1-4">
+      <div class="col-sm-4">
+        <small class="form-text">
+          <%= link_to prova do %><%= prova.nome %> - <%= t("label_tipo_prova_#{prova.tipo}") %><% end %>
+        </small>
+      </div>
+      <div class="col-sm-8">
+        <small class="form-text">
+          <strong><%= t :label_horario_solta %></strong>: <%= prova.dtsolta.strftime(mask_datahora_sem_segundos) %>
+        </small>
+      </div>
+    </div>
+    <div class="row linha-2-0">
+      <div class="col-sm-12">
+        <% if autor_info(prova.usuario) %>
+          <%= link_to edit_prova_path(prova), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-pencil"></span>
+          <% end %>
+          <%= link_to prova, method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, :title => t(:label_excluir), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-trash"></span>
+          <% end %>
+        <% end %>
+        <%= link_to show_modal_result_provas_path(id: prova.id, acao: MODAL_PRV_RESUL, opcao_result: 'P'), class: botao_link, remote: true do %>
+          <span class="fa fa-flag"></span> <%= t :label_informar_chegada %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br />
+<%= link_to competicaos_path, class: botao_link do %>
+  <span class="fa fa-caret-left"></span> <%= t(:label_voltar) %>
+<% end %>
+
+<div id="modal_result"></div>

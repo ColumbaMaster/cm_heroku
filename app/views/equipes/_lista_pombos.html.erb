@@ -1,0 +1,22 @@
+<table class="table table-hover" id="tabpombos" >
+  <thead>
+    <tr>
+      <th><%= t(:label_anilha) %></th>
+      <th><%= t(:label_sexo) %></th>
+     </tr>
+  </thead>
+      
+  <tbody>
+    <% @equipe.pombos.order('anilha').each do |pombo| %>
+      <tr>
+        <td>
+          <%= link_to desassoc_pombo_equipe_path(id: @equipe.id, pombo_id: pombo.id, tela: 'modal'), method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, remote: true, :title => t(:label_remover), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-trash"></span>
+          <% end %>
+          <%= pombo.anilha %>
+        </td>
+        <td><%= pombo.sexo == "F" ? t(:label_sexo_F) : t(:label_sexo_M) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,36 @@
+<% provide(:title, t(:label_fale_conosco)) %>
+
+<h4><strong><%= t :label_fale_conosco %></strong></h4>
+
+<div class="row">
+  <div class="col-md-6 ml-md-auto mr-md-auto">
+    <h5><%= t :msg_info_form_contato_html %></h5>
+    <br />
+    <%= form_for @mensagem, url: create_message_url do |f| %>
+      <%= render 'shared/error_messages', obj: @mensagem %>
+      
+      <div class="form-group">
+        <%= f.label t(:label_nome) %>
+        <%= f.text_field :nome, placeholder:  t(:label_nome), class: 'form-control', required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label t(:label_email) %>
+        <%= f.email_field :email, placeholder: t(:label_email), class: 'form-control', required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label t(:label_telefone) %>
+        <%= f.phone_field :telefone, class: 'form-control', required: true, 'data-inputmask': mask_tel %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label t(:label_mensagem) %>
+        <%= f.text_area :body, placeholder: t(:label_mensagem), class: 'form-control', required: true %>
+      </div>
+      
+      <%= f.submit t(:label_enviar), class: botao_estilo %>
+    <% end %>
+  </div>
+</div>
+<!-- gem 'jquery_mask_rails' # more details at http://bit.ly/jquery-mask-gem -->

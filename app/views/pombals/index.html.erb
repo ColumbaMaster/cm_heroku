@@ -1,0 +1,41 @@
+<% provide(:title, t(:label_lista_pombais)) %>
+<h4><strong><%= t :label_lista_pombais %></strong></h4>
+
+<%= link_to new_pombal_path, class: botao_link do %>
+  <span class="fa fa-plus"></span> <%= "#{t :label_cadastrar} #{t :label_pombal}" %>
+<% end %>
+<br /><br />
+
+<div id="lista_pombal" class="list-group">
+  <% @pombals.each do |pombal| %>
+    <div class="list-group-item">
+      <div class="row linha-1-4">
+        <div class="col-sm-6">
+          <strong><%= t(:label_nome) %></strong>: <%= link_to pombal do %><%= pombal.nome %><% end %>
+        </div>
+        <div class="col-sm-4">
+          <%= "<strong>#{ t :label_data_desativ }</strong>: #{pombal.dtdesativ.strftime(mask_data_ruby)}" if pombal.dtdesativ? %>
+        </div>
+        <div class="col-sm-2">
+          <strong><%= t(:label_qtde) %></strong>: <%= pombal.pombos.count %>
+        </div>
+      </div>
+      <div class="row linha-2-0">
+        <div class="col-sm-12">
+          <%= link_to edit_pombal_path(pombal), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-pencil"></span>
+          <% end %>
+          <%= link_to pombal, method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, :title => t(:label_excluir), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-trash"></span>
+          <% end %>
+          <%= link_to show_modal_aplicacao_pombals_path(id: pombal.id),  class: botao_link, remote: true, :title => "#{t(:label_adicionar_compl, compl: t(:label_tratamento))}", :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-flask"></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div id="modal_gerar_tratamento">
+</div>

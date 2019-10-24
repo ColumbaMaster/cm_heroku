@@ -1,0 +1,122 @@
+<% provide(:title, @prova.nome) %>
+<%= render 'shared/share' %>
+
+<div class="container">
+  <div class="row">
+    <strong><%= "#{Clube.find(@prova.competicao.clb_id).nome.upcase}" %></strong>
+  </div>
+  <div class="row">
+    <strong><%= "#{@prova.competicao.nome.upcase} - #{@prova.competicao.ano}" %></strong>
+  </div>
+  <div class="row">
+    <strong><%= "#{t(:label_prova).upcase} #{@prova.nome}" %> - <%= t("label_tipo_prova_#{@prova.tipo}").upcase %> </strong>
+  </div>
+</div>
+
+<% if autor_info(@prova.usuario) %>
+  <%= link_to edit_prova_path(@prova), class: botao_link do %>
+    <span class="fa fa-pencil"></span>  <%= t :label_editar %>
+  <% end %>
+  <br />
+<% end %>
+<br />
+<div class="container">
+  <div class="row linha-1-4">
+    <strong><%= "#{t(:label_horario_solta)}:" %></strong>&nbsp;<%= @prova.dtsolta.strftime(mask_datahora_sem_segundos) %>
+  </div>
+  
+  <div class="row linha-1-4">
+    <%= "<strong>#{t :label_latitude}</strong>: #{@prova.lat_card} #{number_with_precision(@prova.lat_deg, precision: 0)}º#{number_with_precision(@prova.lat_min, precision: 0).rjust(2, '0')}'#{number_with_precision(@prova.lat_seg, precision: 1)}\"".html_safe %>
+  </div>
+  <div class="row linha-1-4">
+    <%= "<strong>#{t :label_longitude}</strong>: #{@prova.lng_card} #{number_with_precision(@prova.lng_deg, precision: 0)}º#{number_with_precision(@prova.lng_min, precision: 0).rjust(2, '0')}'#{number_with_precision(@prova.lng_seg, precision: 1)}\"".html_safe %>
+  </div>
+  
+</div>
+
+<% if logged_in? %>
+  <%= link_to show_modal_result_provas_path(id: @prova.id, acao: MODAL_PRV_RESUL, opcao_result: 'P'), class: botao_link, remote: true do %>
+    <span class="fa fa-flag"></span> <%= t :label_informar_chegada %>
+  <% end %>
+  <% if Equipe.por_usuario(current_user).count > 0 %>
+    <%= link_to modal_nao_chegaram_prova_path(id: @prova.id), class: botao_link, remote: true do %>
+      <span class="fa fa-dashboard"></span> <%= t :label_ausentes %>
+    <% end %>
+  <% end %>
+  <%= link_to show_modal_result_provas_path(id: @prova.id, acao: MODAL_PRV_ROTA),  class: botao_link, remote: true do %>
+    <span class="fa fa-globe"></span> <%= t :label_rota_voo %>
+  <% end %>
+  <%= link_to preparar_importacao_prova_path(@prova),  class: botao_link do %>
+    <span class="fa fa-upload"></span> <%= t :label_importar %>
+  <% end %>
+  <%= link_to modal_pp_prova_path(@prova), class: botao_link, remote: true do %>
+    <span class="fa fa-cutlery"></span>  <%= t :label_preparo %>
+  <% end %>
+<% end %>
+<span class='<%= botao_link %>' data-toggle="collapse" data-target="#filtro" >
+  <span class="fa fa-search"></span> <%= t(:label_filtrar_por) %>
+</span>
+
+<div id="filtro" class="collapse" >
+  <br />
+  <%= form_tag filter_by_prova_path, class: 'form-inline', method: :get, remote: true do %>
+  
+    <div class="form-group">
+      <div class="form-group">
+        <%= label_tag(:anilha_filter, t(:label_anilha)) %>
+        <%= text_field_tag :anilha_filter, params[:anilha_filter], placeholder: 'Informe a anilha', class: 'form-control', size: 12 %>
+      </div>
+      <div class="form-group">
+        <%= submit_tag t(:label_filtrar), class: botao_estilo, id: "btn_filtro" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br /><br />
+<div class="form-group">
+  <div id="listas_resultados">
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <%= radio_button_tag 'lista_result', 'O', params[:lista_result] == 'O', class: "form-check-input" %><%= t(:label_oficial) %>
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <%= radio_button_tag 'lista_result', 'P', params[:lista_result] == 'P', class: "form-check-input" %><%= t(:label_parcial) %>
+      </label>
+    </div>
+    <br />
+  </div>
+</div>
+
+<div id="result_lista">
+  <% if params[:lista_result] == 'O' %>
+    <%= render 'lista_resultados_oficial' %>
+  <% else %>
+    <%= render 'lista_resultados' %>
+  <% end %>
+</div>
+
+<% if logged_in? %>
+  <br />
+  <%= link_to @prova.competicao, class: botao_link do %>
+    <span class="fa fa-caret-left"></span> <%= t(:label_voltar) %>
+  <% end %>
+<% end %>
+
+<div id="modal_result"></div>
+
+<script>
+  $('input[type=radio][name=lista_result]').on('change', function() {
+    $('#result_lista').html('');
+    switch ($(this).val()) {
+      case 'P':
+        $("#result_lista").html("<%= j render partial: 'lista_resultados' %>");
+        break;
+      case 'O':
+        $("#result_lista").html("<%= j render partial: 'lista_resultados_oficial' %>");
+        break;
+    }
+  });
+
+</script>

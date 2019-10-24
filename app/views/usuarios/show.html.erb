@@ -1,0 +1,28 @@
+<% provide(:title, @usuario.nome) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h4><strong>
+        <%= gravatar_for @usuario %>
+        <%= @usuario.nome %>
+        <%= link_to edit_usuario_path, class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+          <span class="fa fa-pencil"></span>
+        <% end %>
+        <br />
+      </strong></h4>
+      <br /><br />
+      <% if @usuario.planos.count > 0 %>
+        <%= nome_plano @usuario.planos.last %>
+        <span class="<%= class_status_assinatura(@usuario.planos.last) %>"><%= t status_assinatura(@usuario.planos.last) %></span>
+      <% end %>
+    </section>
+  </aside>
+  <article>
+    <p>
+      <%= link_to "#{t :label_editar} #{t(:label_perfil)}", edit_usuario_path,  class: botao_estilo  %>
+      <%= link_to "#{t :label_editar} #{t(:label_endereco)}", endereco_usuario_path,  class: botao_estilo  %>
+      <%= link_to t(:label_plano_vigente), detalhar_assinatura_usuario_path,  class: botao_estilo  %>
+        
+    </p>
+  </article>
+</div>

@@ -1,0 +1,6 @@
+<%= t :columba_master %>
+<%= @usuario.nome %>,
+
+<%= t(:msg_info_ativacao_conta_email) %>
+
+<%= edit_account_activation_url(@usuario.activation_token, email: @usuario.email) %>

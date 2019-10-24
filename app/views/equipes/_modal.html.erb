@@ -1,0 +1,40 @@
+<!-- https://www.mirceasamuila.com/posts/bootstrap-modals-in-rails -->
+<div id="modal_equipe_partial" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title"><%= "#{t :label_time} #{@equipe.nome} "%></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div id="modal_msg"></div>
+                            
+        <%= form_for(@pombo, url: assoc_pombo_equipe_path, method: "post", remote: true) do |f| %>
+          <%= render 'shared/error_messages', obj: @pombo %>
+          
+          <div class="form-group">
+            <%= f.label t :label_anilha %>
+            <%= f.text_field :anilha, size: 12, class: 'form-control', required: true, autofocus: true %>
+          </div>
+          
+          <%= f.submit t(:label_adicionar), class: botao_estilo %>
+          
+        <% end %>
+        
+        <br />
+        <h5><%= t :label_lista_pombos %></a></h5>
+      
+        <div class="card-body">
+          <%= render 'lista_pombos' %>
+        </div>
+          
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal"><%= t(:label_fechar) %></button>
+      </div>
+    </div>
+  </div>
+</div>

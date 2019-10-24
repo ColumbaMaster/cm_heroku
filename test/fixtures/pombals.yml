@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  dtdesativ: 2018-05-11 13:14:55
+  usuario: michael
+
+two:
+  nome: MyString
+  dtdesativ: 2018-05-11 13:14:55
+  usuario: michael

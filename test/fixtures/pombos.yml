@@ -1,0 +1,28 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  anilha: MyString
+  nome: filho
+  dtnasc: 2017-03-31 18:33:49
+  sexo: M
+  cor: one
+  vivo: 1
+  usuario: michael
+
+two:
+  anilha: MyString
+  nome: mae
+  dtnasc: 2017-03-31 18:33:49
+  sexo: F
+  cor: two
+  vivo: 1
+  usuario: michael
+
+three:
+  anilha: MyString
+  nome: pai
+  dtnasc: 2017-03-31 18:33:49
+  sexo: M
+  cor: one
+  vivo: 1
+  usuario: michael

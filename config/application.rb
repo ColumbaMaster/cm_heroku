@@ -15,5 +15,14 @@ module CmasterHeroku
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    
+    I18n.available_locales = [:en, :'pt-BR']
+    I18n.default_locale = :'pt-BR'
+    
+    config.time_zone = 'Brasilia'
+    config.encoding = "utf-8"
+    
+    config.autoload_paths += %W(#{config.root}/lib)
+    
   end
 end

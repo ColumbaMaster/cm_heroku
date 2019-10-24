@@ -1,0 +1,58 @@
+<br />
+<div id="lista_pombos" class="list-group">
+  <% @pombos.each do |pombo| %>
+    <div class="list-group-item">
+      <div class="row linha-1-4">
+        <div class="col-sm-4">
+          <strong><%= t(:label_pombo) %></strong>: <%= link_to "#{pombo.anilha} #{pombo.nome}", edit_pombo_path(pombo) %>
+        </div>
+        <div class="col-sm-3">
+          <strong><%= t(:label_ano) %></strong>: <%= pombo.dtnasc ? pombo.dtnasc.year : pombo.dtnasc %>
+        </div>
+        <div class="col-sm-3">
+          <strong><%= t(:label_cor) %></strong>: <%= pombo.cor_id && pombo.cor_id != 11 ? t(pombo.cor.nome) : '' %>
+        </div>
+        <div class="col-sm-2">
+          <strong><%= t(:label_sexo) %></strong>: <%= pombo.sexo == "F" ? t(:label_sexo_F) : t(:label_sexo_M) %>
+        </div>
+      </div>
+      <div class="row linha-1-4">
+        <div class="col-sm-6">
+          <strong><%= t(:label_pai) %></strong>: <%= parente_nome(pombo,'P') %>
+        </div>
+        <div class="col-sm-6">
+          <strong><%= t(:label_mae) %></strong>: <%= parente_nome(pombo,'M') %>
+        </div>
+      </div>
+      
+      <div class="row linha-2-0">
+        <div class="col-sm-12">
+          <%= link_to pombo, class: botao_link, :title => t(:label_pedigree), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-share-alt"></span>
+          <% end %>
+          <%= link_to edit_pombo_path(pombo), class: botao_link, :title => t(:label_editar), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-pencil"></span>
+          <% end %>
+          <%= link_to pombo, method: :delete, data: { confirm: t(:msg_quest_apagar_padrao) }, class: botao_link, :title => t(:label_excluir), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-trash"></span>
+          <% end %>
+          <%= link_to show_modal_pombos_path(id: pombo.id, tela: 'M'),  class: botao_link, remote: true, :title => t(:label_mais_info), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-info-circle"></span>
+          <% end %>
+          <%= link_to show_modal_aplicacao_pombos_path(id: pombo.id),  class: botao_link, remote: true, :title => t(:label_adicionar_compl, compl: t(:label_aplicacao)), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-flask"></span>
+          <% end %>
+          <%= link_to show_modal_pombos_path(id: pombo.id, tela: 'T'),  class: botao_link, remote: true, :title => t(:label_premio), :rel => 'tooltip', "data-placement" => "bottom" do %>
+            <span class="fa fa-star-o"></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div id="modal_pombo">
+</div>
+
+<div id="modal_gerar_tratamento">
+</div>

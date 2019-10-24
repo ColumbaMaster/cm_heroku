@@ -1,0 +1,71 @@
+<% provide(:title, "Pedigre #{@pombo.anilha}") %>
+
+<p>
+<h4><strong><%= "#{t :label_pedigree}: #{@pombo.anilha} #{@pombo.nome}" %></strong></h4>
+</p>
+
+<table style="height: 100%;">
+  <tbody>
+    <tr>
+      
+      <td class="align-middle caixa">
+        <!-- pombo -->
+        <%= render 'caixa', pombo: @pombo, estilo: '1' %>
+      </td>
+      
+      <td class="align-middle caixa">
+        <!-- pais -->
+        <%= render 'caixa', pombo: @pombo.pai, estilo: '2', mostra_vazio: true %>
+        
+        <div class="caixa_padding_3"></div>
+        
+        <%= render 'caixa', pombo: @pombo.mae, estilo: '3', mostra_vazio: true %>
+      </td>
+      
+      <td class="align-middle caixa">
+        <!-- avos -->
+        <%= render 'caixa', pombo: @pombo.avo_paterno('M'), estilo: '4', mostra_vazio: false %>
+        <div class="caixa_padding_2"></div>
+        <%= render 'caixa', pombo: @pombo.avo_paterno('F'), estilo: '5', mostra_vazio: false %>
+        
+        <div class="caixa_padding_2"></div>
+        
+        <%= render 'caixa', pombo: @pombo.avo_materno('M'), estilo: '6', mostra_vazio: false %>
+        <div class="caixa_padding_2"></div>
+        <%= render 'caixa', pombo: @pombo.avo_materno('F'), estilo: '7', mostra_vazio: false %>
+        
+      </td>
+      
+      <td class="align-middle caixa"> 
+      
+        <!-- bisavos paternos-->
+        <%= render 'caixa', pombo: @pombo.bisavo_paterno('M','M'), estilo: '4', mostra_vazio: false %>
+        <%= render 'caixa', pombo: @pombo.bisavo_paterno('M','F'), estilo: '4', mostra_vazio: false %>
+        
+        <%= render 'caixa', pombo: @pombo.bisavo_paterno('F','M'), estilo: '5', mostra_vazio: false %>
+        <%= render 'caixa', pombo: @pombo.bisavo_paterno('F','F'), estilo: '5', mostra_vazio: false %>
+        
+        <!-- bisavos maternos-->
+        <%= render 'caixa', pombo: @pombo.bisavo_materno('M','M'), estilo: '6', mostra_vazio: false %>
+        <%= render 'caixa', pombo: @pombo.bisavo_materno('M','F'), estilo: '6', mostra_vazio: false %>
+        
+        <%= render 'caixa', pombo: @pombo.bisavo_materno('F','M'), estilo: '7', mostra_vazio: false %>
+        <%= render 'caixa', pombo: @pombo.bisavo_materno('F','F'), estilo: '7', mostra_vazio: false %>
+        
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<%= render 'shared/share' %>
+
+<% if logged_in? %>
+
+  <%= link_to :back, class: botao_link do %>
+    <span class="fa fa-caret-left"></span> <%= t(:label_voltar) %>
+  <% end %>
+  
+<% end %>
+
+<div id="modal_pombo"></div>

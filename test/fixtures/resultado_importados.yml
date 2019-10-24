@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classificacao: 1
+  anilha: MyString
+  ano: 1
+  p_sn: MyString
+  d_sn: MyString
+  e_sn: MyString
+  idcriador: 1
+  nomecriador: MyString
+  hora_chegada: MyString
+  distancia: 1.5
+  media: 1.5
+  pontos: 1
+
+two:
+  classificacao: 1
+  anilha: MyString
+  ano: 1
+  p_sn: MyString
+  d_sn: MyString
+  e_sn: MyString
+  idcriador: 1
+  nomecriador: MyString
+  hora_chegada: MyString
+  distancia: 1.5
+  media: 1.5
+  pontos: 1
